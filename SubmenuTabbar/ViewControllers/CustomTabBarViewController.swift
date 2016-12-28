@@ -18,6 +18,8 @@ class CustomTabBarViewController: UIViewController {
                                   "MapViewController",
                                   "PortfolioViewController"]
     
+    var contextMenuTableView: YALContextMenuTableView!
+    
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var submenuView: UIView!
     @IBOutlet weak var initialTabButton: UIButton!
@@ -48,7 +50,8 @@ class CustomTabBarViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func tabButtonPressed(_ sender: UIButton) {
         let tabIndex = sender.tag
-        guard tabIndex < viewControllersClasses.count else {
+        let viewControllersIds = TabsSubmenuProvider.tabViewControllersIds()
+        guard tabIndex < viewControllersIds.count else {
             print("Another method needed for menu button")
             return
         }
@@ -68,19 +71,59 @@ class CustomTabBarViewController: UIViewController {
     
     // MARK: - Private VC logic
     private func changeToVCAtIndex(_ tabIndex: Int){
+        let viewControllersIds = TabsSubmenuProvider.tabViewControllersIds()
+        guard tabIndex < viewControllersIds.count else {
+            print("Menu index out of tabViewControllersIds range")
+            return
+        }
+        
         if currentViewController != nil {
             currentViewController.view.removeFromSuperview()
             currentViewController.removeFromParentViewController()
         }
         
-        let className = viewControllersClasses[tabIndex]
-        
+        let viewControllersId = viewControllersIds[tabIndex]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: className) 
+        let viewController = storyboard.instantiateViewController(withIdentifier: viewControllersId)
         
         mainView.addSubview(viewController.view)
         self.addChildViewController(viewController)
         currentViewController = viewController
+        
+        //TODO:
+        //        [self preselectSubmenuItem];
     }
     
 }
+
+// MARK: - Menu datasource/delegate extension
+
+extension CustomTabBarViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    // MARK: - Table view delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.tabBarView.frame.size.height
+    }
+    
+    // MARK: - Table view datasource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let items = TabsSubmenuProvider.submenuItemsForVCId(vcIdentifier: self.currentViewController.restorationIdentifier!)
+        //+1 for empty cell to avoid ugly overlay in case of menu inset - assume it like a cancel button
+        return items.count + 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContextMenuCell", for: indexPath)
+        let items = TabsSubmenuProvider.submenuItemsForVCId(vcIdentifier: self.currentViewController.restorationIdentifier!)
+        let object = items[indexPath.row] as SubmenuItem
+//        cell.titleLabel.text = object.image.name
+
+        return cell
+    }
+    
+}
+

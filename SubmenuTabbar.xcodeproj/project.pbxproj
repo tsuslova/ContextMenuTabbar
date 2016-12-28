@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		991F51BA1E03D8A6005B2E38 /* ContextMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991F51B81E03D8A6005B2E38 /* ContextMenuCell.xib */; };
+		991F51C11E03EE38005B2E38 /* ContextMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991F51C01E03EE38005B2E38 /* ContextMenuCell.swift */; };
+		991F51C31E03F414005B2E38 /* libContextMenu.iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 991F51C21E03F414005B2E38 /* libContextMenu.iOS.a */; };
+		99430DC71E02589500669911 /* SubmenuByTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99430DC61E02589500669911 /* SubmenuByTab.plist */; };
+		99430DC91E0258B600669911 /* SubmenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99430DC81E0258B600669911 /* SubmenuItem.swift */; };
+		99430DCB1E0260FC00669911 /* TabsSubmenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99430DCA1E0260FC00669911 /* TabsSubmenuProvider.swift */; };
 		9960B3191DF538C7008B07A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960B3181DF538C7008B07A5 /* AppDelegate.swift */; };
 		9960B3221DF538C7008B07A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9960B3211DF538C7008B07A5 /* Assets.xcassets */; };
 		9960B3251DF538C7008B07A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9960B3231DF538C7008B07A5 /* LaunchScreen.storyboard */; };
@@ -16,12 +22,18 @@
 		99A821631E0008E600458274 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A8215E1E0008E600458274 /* SettingsViewController.swift */; };
 		99A821641E0008E600458274 /* StandingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A8215F1E0008E600458274 /* StandingsViewController.swift */; };
 		99A821671E00097200458274 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99A821651E00097200458274 /* Main.storyboard */; };
-		D4E4C80EFE04231DF05F2A02 /* libPods-SubmenuTabbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 360C289950ECA1E5283B9728 /* libPods-SubmenuTabbar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		360C289950ECA1E5283B9728 /* libPods-SubmenuTabbar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SubmenuTabbar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93209963EFC54C9D2BB41C72 /* Pods-SubmenuTabbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubmenuTabbar.release.xcconfig"; path = "Pods/Target Support Files/Pods-SubmenuTabbar/Pods-SubmenuTabbar.release.xcconfig"; sourceTree = "<group>"; };
+		991F51B81E03D8A6005B2E38 /* ContextMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContextMenuCell.xib; sourceTree = "<group>"; };
+		991F51BC1E03DBD8005B2E38 /* SubmenuTabbar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SubmenuTabbar-Bridging-Header.h"; sourceTree = "<group>"; };
+		991F51C01E03EE38005B2E38 /* ContextMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextMenuCell.swift; sourceTree = "<group>"; };
+		991F51C21E03F414005B2E38 /* libContextMenu.iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libContextMenu.iOS.a; path = "../../../Library/Developer/Xcode/DerivedData/SubmenuTabbar-hdefzbnvmyobiydgeqwyxpoqewck/Build/Products/Debug-iphoneos/ContextMenu.iOS/libContextMenu.iOS.a"; sourceTree = "<group>"; };
+		99430DC61E02589500669911 /* SubmenuByTab.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SubmenuByTab.plist; sourceTree = "<group>"; };
+		99430DC81E0258B600669911 /* SubmenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmenuItem.swift; sourceTree = "<group>"; };
+		99430DCA1E0260FC00669911 /* TabsSubmenuProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsSubmenuProvider.swift; sourceTree = "<group>"; };
 		9960B3151DF538C7008B07A5 /* SubmenuTabbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubmenuTabbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9960B3181DF538C7008B07A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9960B3211DF538C7008B07A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -41,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4E4C80EFE04231DF05F2A02 /* libPods-SubmenuTabbar.a in Frameworks */,
+				991F51C31E03F414005B2E38 /* libContextMenu.iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +63,7 @@
 		1A89D371956056B6EB372541 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				991F51C21E03F414005B2E38 /* libContextMenu.iOS.a */,
 				360C289950ECA1E5283B9728 /* libPods-SubmenuTabbar.a */,
 			);
 			name = Frameworks;
@@ -108,6 +121,9 @@
 		99A821581E0008E600458274 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				99430DC61E02589500669911 /* SubmenuByTab.plist */,
+				99430DC81E0258B600669911 /* SubmenuItem.swift */,
+				99430DCA1E0260FC00669911 /* TabsSubmenuProvider.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -115,6 +131,9 @@
 		99A821591E0008E600458274 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				991F51C01E03EE38005B2E38 /* ContextMenuCell.swift */,
+				991F51B81E03D8A6005B2E38 /* ContextMenuCell.xib */,
+				991F51BC1E03DBD8005B2E38 /* SubmenuTabbar-Bridging-Header.h */,
 				99A821651E00097200458274 /* Main.storyboard */,
 			);
 			path = View;
@@ -168,6 +187,7 @@
 					9960B3141DF538C7008B07A5 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = WJ4DT67S8G;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -196,6 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				99A821671E00097200458274 /* Main.storyboard in Resources */,
+				991F51BA1E03D8A6005B2E38 /* ContextMenuCell.xib in Resources */,
+				99430DC71E02589500669911 /* SubmenuByTab.plist in Resources */,
 				9960B3251DF538C7008B07A5 /* LaunchScreen.storyboard in Resources */,
 				9960B3221DF538C7008B07A5 /* Assets.xcassets in Resources */,
 			);
@@ -256,11 +278,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99430DCB1E0260FC00669911 /* TabsSubmenuProvider.swift in Sources */,
 				99A821601E0008E600458274 /* CustomTabBarViewController.swift in Sources */,
 				99A821621E0008E600458274 /* PortfolioViewController.swift in Sources */,
+				991F51C11E03EE38005B2E38 /* ContextMenuCell.swift in Sources */,
 				99A821641E0008E600458274 /* StandingsViewController.swift in Sources */,
 				99A821611E0008E600458274 /* MapViewController.swift in Sources */,
 				99A821631E0008E600458274 /* SettingsViewController.swift in Sources */,
+				99430DC91E0258B600669911 /* SubmenuItem.swift in Sources */,
 				9960B3191DF538C7008B07A5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,12 +409,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CDCF97F3F8332EBB096B41AE /* Pods-SubmenuTabbar.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = WJ4DT67S8G;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SubmenuTabbar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = toto.SubmenuTabbar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SubmenuTabbar/View/SubmenuTabbar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -398,12 +429,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 93209963EFC54C9D2BB41C72 /* Pods-SubmenuTabbar.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = WJ4DT67S8G;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SubmenuTabbar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = toto.SubmenuTabbar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SubmenuTabbar/View/SubmenuTabbar-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
