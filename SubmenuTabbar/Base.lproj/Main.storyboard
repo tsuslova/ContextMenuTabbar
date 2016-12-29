@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xQT-aM-8F8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xQT-aM-8F8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -160,11 +160,6 @@
                         <outlet property="currentMenuImage" destination="NRb-xE-w2G" id="hP3-b2-ruS"/>
                         <outlet property="initialTabButton" destination="T4c-dp-HcS" id="u5r-iX-ZcY"/>
                         <outlet property="mainView" destination="aSo-Ib-eEq" id="xRH-bh-463"/>
-                        <outlet property="mapButton" destination="Jli-yG-1Me" id="k20-d0-wLw"/>
-                        <outlet property="portfolioButton" destination="33I-cA-Zg9" id="gla-5L-Pg7"/>
-                        <outlet property="settingsButton" destination="T4c-dp-HcS" id="YHj-eg-1aL"/>
-                        <outlet property="standingsButton" destination="UcH-yf-JiS" id="X3c-qd-3VR"/>
-                        <outlet property="submenuButton" destination="QQs-KM-Xhm" id="bei-xc-Iqb"/>
                         <outlet property="tabBarView" destination="0N7-ko-wMR" id="qK7-yR-wQu"/>
                     </connections>
                 </viewController>

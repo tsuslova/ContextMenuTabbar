@@ -23,7 +23,6 @@ class ContextMenuCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.selectionStyle = UITableViewCellSelectionStyleNone;
         layer.masksToBounds = true
         layer.shadowOffset = CGSize(width: 0, height: 2)
         
@@ -31,12 +30,6 @@ class ContextMenuCell: UITableViewCell {
         layer.shadowRadius = 5
         layer.shadowOpacity = 0.5
         menuImageView.image = item?.image
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 }
 

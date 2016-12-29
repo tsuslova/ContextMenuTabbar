@@ -10,14 +10,6 @@ import UIKit
 
 class CustomTabBarViewController: UIViewController {
     
-    // MARK: - Configuration
-    // List here all VCs storyboard ids, accessible from TabBar
-    
-    let viewControllersClasses = ["SettingsViewController",
-                                  "StandingsViewController",
-                                  "MapViewController",
-                                  "PortfolioViewController"]
-    
     var contextMenuTableView: YALContextMenuTableView!
     
     @IBOutlet weak var mainView: UIView!
@@ -34,9 +26,7 @@ class CustomTabBarViewController: UIViewController {
     @IBOutlet weak var standingsButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var portfolioButton: UIButton!
-    
-    @IBOutlet weak var submenuButton: UIButton!
-        
+            
     
     var currentViewController: UIViewController!
     lazy var currentBarButton: UIButton = self.initialTabButton
@@ -44,7 +34,7 @@ class CustomTabBarViewController: UIViewController {
     // MARK: - VC lyfecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.changeToVCAtIndex(0)
+        changeToVCAtIndex(0)
     }
     
     // MARK: - IBActions
@@ -106,11 +96,10 @@ class CustomTabBarViewController: UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: viewControllersId)
         
         mainView.addSubview(viewController.view)
-        self.addChildViewController(viewController)
+        addChildViewController(viewController)
         currentViewController = viewController
         
-        //TODO:
-        //        [self preselectSubmenuItem];
+        preselectSubmenuItem()
     }
     
     func submenuItemSelected(item:SubmenuItem){
@@ -118,12 +107,10 @@ class CustomTabBarViewController: UIViewController {
         TabsSubmenuProvider.select(item: item, forVCId: currentViewController.restorationIdentifier!)
     }
     
-//    
-//    - (void)preselectSubmenuItem{
-//    NSLog(@"%@", self.currentViewController.restorationIdentifier);
-//    SubmenuItem *item = [TabsSubmenuProvider selectedItemForVCId:self.currentViewController.restorationIdentifier];
-//    self.currentMenuImage.image = item.selectedImage;
-//    }
+    func preselectSubmenuItem() {
+        let item = TabsSubmenuProvider.selectedItem(forVCId: currentViewController.restorationIdentifier!)
+        currentMenuImage.image = item.selectedImage
+    }
 
     func submenuItem(forIndexPath indexPath: IndexPath) -> SubmenuItem? {
         let items = TabsSubmenuProvider.submenuItemsForVCId(vcIdentifier: currentViewController.restorationIdentifier!)
@@ -151,19 +138,19 @@ extension CustomTabBarViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.tabBarView.frame.size.height
+        return tabBarView.frame.size.height
     }
     
     // MARK: - Table view datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let items = TabsSubmenuProvider.submenuItemsForVCId(vcIdentifier: self.currentViewController.restorationIdentifier!)
+        let items = TabsSubmenuProvider.submenuItemsForVCId(vcIdentifier: currentViewController.restorationIdentifier!)
         //+1 for empty cell to avoid ugly overlay in case of menu inset - assume it like a cancel button
         return items.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuConf.cellIdentifier, for: indexPath) as! ContextMenuCell
-        if let item = self.submenuItem(forIndexPath: indexPath) {
+        if let item = submenuItem(forIndexPath: indexPath) {
             cell.item = item
         }
 
@@ -175,8 +162,8 @@ extension CustomTabBarViewController: UITableViewDataSource, UITableViewDelegate
 
 extension CustomTabBarViewController: YALContextMenuTableViewDelegate {
     func contextMenuTableView(_ contextMenuTableView: YALContextMenuTableView!, didDismissWith indexPath: IndexPath!) {
-        if let item = self.submenuItem(forIndexPath: indexPath){
-            self.submenuItemSelected(item: item)
+        if let item = submenuItem(forIndexPath: indexPath){
+            submenuItemSelected(item: item)
         }
         
     }

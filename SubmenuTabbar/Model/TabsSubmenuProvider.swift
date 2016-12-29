@@ -9,9 +9,6 @@
 import UIKit
 
 class TabsSubmenuProvider: NSObject {
-    
-    //static let sharedInstance = TabsSubmenuProvider()
-    
     //Plist keys:
     static let kTabsKey = "OrderedTabs"
     
@@ -19,7 +16,7 @@ class TabsSubmenuProvider: NSObject {
     // MARK: - Static interface:
     
     static func tabViewControllersIds() -> Array<String>{
-        let tabsData = self.submenuData()
+        let tabsData = submenuData()
         return tabsData[TabsSubmenuProvider.kTabsKey] as! Array<String>
     }
     
@@ -34,7 +31,7 @@ class TabsSubmenuProvider: NSObject {
         
         submenuItems = Array<SubmenuItem>()
         
-        let submenuItemsDictionary = self.submenuData()[vcIdentifier] as! Array<Dictionary<String, Any>>
+        let submenuItemsDictionary = submenuData()[vcIdentifier] as! Array<Dictionary<String, Any>>
         
         for dict in submenuItemsDictionary {
             let item = SubmenuItem(dictionary: dict)
@@ -45,24 +42,18 @@ class TabsSubmenuProvider: NSObject {
         return submenuItems!
     }
     
-    //NSUserDefaults key:
-    static let kSelectedItemKey = "SelectedItemKey"
-    static func selectedItemKeyForVcId(vcIdentifier: String) -> String {
-        return kSelectedItemKey + "_" + vcIdentifier
-    }
-    
     static func select(item:SubmenuItem, forVCId vcIdentifier: String){
         //Assume that menu items list is not changed often, so it's not critical to perform the item
         //serialization - it's enough to store item index
         let submenuItems = submenuItemsForVCId(vcIdentifier: vcIdentifier)
         let itemIndex = submenuItems.index(of: item)
-        UserDefaults.standard.set(itemIndex, forKey: selectedItemKeyForVcId(vcIdentifier: vcIdentifier))
+        UserDefaults.standard.set(itemIndex, forKey: selectedItemKey(forVCId: vcIdentifier))
         UserDefaults.standard.synchronize()
 
     }
     
     static func selectedItem(forVCId vcIdentifier:String) -> SubmenuItem {
-        let selectedItemIndex = UserDefaults.standard.object(forKey: selectedItemKeyForVcId(vcIdentifier: vcIdentifier)) as? Int
+        let selectedItemIndex = UserDefaults.standard.object(forKey: selectedItemKey(forVCId: vcIdentifier)) as? Int
         let submenuItems = submenuItemsForVCId(vcIdentifier: vcIdentifier)
         
         guard selectedItemIndex != nil && submenuItems.count > selectedItemIndex! else {
@@ -75,14 +66,19 @@ class TabsSubmenuProvider: NSObject {
     // MARK: - Implementation:
     private static var dataDictionary: Dictionary<String, Any>?
     private static func submenuData() -> Dictionary<String, Any>{
-        if self.dataDictionary == nil{
+        if dataDictionary == nil{
             if let path = Bundle.main.path(forResource: "SubmenuByTab", ofType: "plist"){
                 let url = URL(fileURLWithPath: path)
                 let data = try! Data(contentsOf: url)
-                self.dataDictionary = try! PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as! Dictionary<String, Any>
+                dataDictionary = try! PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as! Dictionary<String, Any>
                 }
             }
-        return self.dataDictionary!
+        return dataDictionary!
     }
-    
+        
+    //NSUserDefaults key:
+    static let kSelectedItemKey = "SelectedItemKey"
+    private static func selectedItemKey(forVCId vcIdentifier: String) -> String {
+        return kSelectedItemKey + "_" + vcIdentifier
+    }
 }
