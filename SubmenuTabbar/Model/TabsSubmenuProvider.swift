@@ -45,28 +45,32 @@ class TabsSubmenuProvider: NSObject {
         return submenuItems!
     }
     
-    //TODO
-    //    + (NSArray*)submenuItemsForVCId:(NSString*)vcIdentifier{
-    //    static NSMutableDictionary *itemsCache = nil
-    //    if (!itemsCache){
-    //    itemsCache = [NSMutableDictionary dictionary]
-    //    }
-    //
-    //    NSMutableArray *submenuItems = itemsCache[vcIdentifier]
-    //    if (submenuItems){
-    //    return submenuItems
-    //    }
-    //    submenuItems = [NSMutableArray array]
-    //    NSArray *submenuItemsDictionary = [self loadSubmenuData][vcIdentifier]
-    //
-    //    for (NSDictionary *dict in submenuItemsDictionary){
-    //    SubmenuItem *item = [[SubmenuItem alloc] initWithDictionary:dict]
-    //    [submenuItems addObject:item]
-    //    }
-    //    [itemsCache setObject:submenuItems forKey:vcIdentifier]
-    //    return submenuItems
-    //    }
+    //NSUserDefaults key:
+    static let kSelectedItemKey = "SelectedItemKey"
+    static func selectedItemKeyForVcId(vcIdentifier: String) -> String {
+        return kSelectedItemKey + "_" + vcIdentifier
+    }
+    
+    static func select(item:SubmenuItem, forVCId vcIdentifier: String){
+        //Assume that menu items list is not changed often, so it's not critical to perform the item
+        //serialization - it's enough to store item index
+        let submenuItems = submenuItemsForVCId(vcIdentifier: vcIdentifier)
+        let itemIndex = submenuItems.index(of: item)
+        UserDefaults.standard.set(itemIndex, forKey: selectedItemKeyForVcId(vcIdentifier: vcIdentifier))
+        UserDefaults.standard.synchronize()
 
+    }
+    
+    static func selectedItem(forVCId vcIdentifier:String) -> SubmenuItem {
+        let selectedItemIndex = UserDefaults.standard.object(forKey: selectedItemKeyForVcId(vcIdentifier: vcIdentifier)) as? Int
+        let submenuItems = submenuItemsForVCId(vcIdentifier: vcIdentifier)
+        
+        guard selectedItemIndex != nil && submenuItems.count > selectedItemIndex! else {
+            print("Saved selected item index out of current range - return first element")
+            return submenuItems.first!
+        }
+        return submenuItems[selectedItemIndex!]
+    }
     
     // MARK: - Implementation:
     private static var dataDictionary: Dictionary<String, Any>?

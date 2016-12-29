@@ -74,8 +74,8 @@ class CustomTabBarViewController: UIViewController {
         if contextMenuTableView == nil {
             contextMenuTableView = YALContextMenuTableView(tableViewDelegateDataSource: self)
             contextMenuTableView.animationDuration = MenuConf.animationDuration
-            //TODO
-//            contextMenuTableView.yalDelegate = self
+            
+            contextMenuTableView.yalDelegate = self
             contextMenuTableView.menuItemsSide = .Right
             contextMenuTableView.menuItemsAppearanceDirection = .FromBottomToTop
             
@@ -112,9 +112,21 @@ class CustomTabBarViewController: UIViewController {
         //TODO:
         //        [self preselectSubmenuItem];
     }
+    
+    func submenuItemSelected(item:SubmenuItem){
+        currentMenuImage.image = item.selectedImage
+        TabsSubmenuProvider.select(item: item, forVCId: currentViewController.restorationIdentifier!)
+    }
+    
+//    
+//    - (void)preselectSubmenuItem{
+//    NSLog(@"%@", self.currentViewController.restorationIdentifier);
+//    SubmenuItem *item = [TabsSubmenuProvider selectedItemForVCId:self.currentViewController.restorationIdentifier];
+//    self.currentMenuImage.image = item.selectedImage;
+//    }
 
     func submenuItem(forIndexPath indexPath: IndexPath) -> SubmenuItem? {
-        let items = TabsSubmenuProvider.submenuItemsForVCId(vcIdentifier: self.currentViewController.restorationIdentifier!)
+        let items = TabsSubmenuProvider.submenuItemsForVCId(vcIdentifier: currentViewController.restorationIdentifier!)
         //Map index for context menu:
         // 1. the menu displayed items upsidedown, to leave order like in plist invert it
         // 2. we add additional item to be displayed above tabbar since edge inset works improperly in context menu
@@ -125,6 +137,7 @@ class CustomTabBarViewController: UIViewController {
         return items[itemIndex]
 
     }
+    
 }
 
 // MARK: - Menu datasource/delegate extension
@@ -132,8 +145,9 @@ class CustomTabBarViewController: UIViewController {
 extension CustomTabBarViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Table view delegate
-    @nonobjc func tableView(_ tableView: YALContextMenuTableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.dismis(with: indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let yalTableView = tableView as! YALContextMenuTableView
+        yalTableView.dismis(with: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -158,3 +172,12 @@ extension CustomTabBarViewController: UITableViewDataSource, UITableViewDelegate
     
 }
 
+
+extension CustomTabBarViewController: YALContextMenuTableViewDelegate {
+    func contextMenuTableView(_ contextMenuTableView: YALContextMenuTableView!, didDismissWith indexPath: IndexPath!) {
+        if let item = self.submenuItem(forIndexPath: indexPath){
+            self.submenuItemSelected(item: item)
+        }
+        
+    }
+}
