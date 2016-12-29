@@ -23,9 +23,26 @@ class TabsSubmenuProvider: NSObject {
         return tabsData[TabsSubmenuProvider.kTabsKey] as! Array<String>
     }
     
+    static var itemsCache = Dictionary<String, Array<SubmenuItem>>()
+    
     static func submenuItemsForVCId(vcIdentifier: String) -> Array<SubmenuItem>{
-        let tabsData = self.submenuData()
-        return tabsData[vcIdentifier] as! Array<SubmenuItem>
+        var submenuItems = itemsCache[vcIdentifier]
+        
+        if submenuItems != nil {
+            return submenuItems!
+        }
+        
+        submenuItems = Array<SubmenuItem>()
+        
+        let submenuItemsDictionary = self.submenuData()[vcIdentifier] as! Array<Dictionary<String, Any>>
+        
+        for dict in submenuItemsDictionary {
+            let item = SubmenuItem(dictionary: dict)
+            submenuItems?.append(item)
+        }
+        itemsCache.updateValue(submenuItems!, forKey: vcIdentifier)
+        
+        return submenuItems!
     }
     
     //TODO

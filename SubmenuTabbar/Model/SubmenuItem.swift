@@ -15,7 +15,7 @@ class SubmenuItem: NSObject {
     
     struct MenuDataConf {
         static let imageKey = "image"
-        static let selectedImageSuffix = "longitude"
+        static let selectedImageSuffix = "_selected"
     }
         
     init(dictionary: Dictionary<String, Any>) {
